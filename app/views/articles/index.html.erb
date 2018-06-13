@@ -1,0 +1,26 @@
+<h1>All Articles</h1>
+
+<%= link_to 'Write a New Post', new_article_path %>
+
+<br><br>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+
+  <% @articles.each do |article| %>
+  <tr>
+    <td>
+      <%= article.title %>
+    </td>
+    <td>
+      <%= article.text %>
+    </td>
+    <td>
+      <%= link_to 'Show Article', article_path(article) %>
+    </td>
+  </tr>
+  <% end %>
+</table>

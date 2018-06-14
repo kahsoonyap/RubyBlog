@@ -1,14 +1,18 @@
-<p>
+<h1>
   <strong>
     Title:
   </strong>
+</h1>
+<p>
   <%= @article.title %>
 </p>
 
-<p>
+<h1>
   <strong>
     Text:
   </strong>
+</h1>
+<p>
   <%= @article.text %>
 </p>
 
@@ -19,3 +23,43 @@
 <p>
   <%= link_to 'Back to all Posts', articles_path %>
 </p>
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+<p>
+  <strong>
+    Commenter:
+  </strong>
+  <%= comment.commenter %>
+</p>
+<p>
+  <strong>
+    Comment:
+  </strong>
+  <%= comment.body %>
+</p>
+<% end %>
+
+<p>
+  <%= button_to 'Delete Article', article_path(@article), method: :delete, data: {confirm: 'Are you sure you want to delete this article?' } %>
+</p>
+
+<h2>Add a Comment</h2>
+
+<%= form_with model: [@article, @article.comments.build], local: true do |form| %>
+<p>
+  <%= form.label :commenter %>
+  <br>
+  <%= form.text_field :commenter %>
+</p>
+
+<p>
+  <%= form.label :body %>
+  <br>
+  <%= form.text_area :body %>
+</p>
+
+<p>
+  <%= form.submit %>
+</p>
+<% end %>
